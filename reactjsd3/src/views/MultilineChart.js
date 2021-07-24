@@ -1,61 +1,92 @@
 /** MultilineChart.js */
 import React from "react";
 import * as d3 from "d3";
+import data from './flare-2.json'
+
 class MultilineChart extends React.Component {
-        constructor(props) {
-            super(props);
-            this.state = {
-                data: [],
-                
-            };
-        }
-        componentDidMount() {
-            var ts = []
-            for (var i = 0; i < 10; i++) {
-                ts.push(Math.floor(Math.random() * 7) + 2);
-            }
-            this.setState({
-                data: ts
-            });
-            console.log(this.state.data)
-            console.log(ts)
-            var svg = d3.select('.svg');
-            // 設定畫布尺寸 & 邊距
-            var margin = 40,
-                width = 960 - margin * 2,
-                height = 500 - margin * 2;
-            svg.attr({
-                "width": width + margin,
-                "height": height + margin * 2,
-                "transform": "translate(" + margin + "," + margin + ")"
-            });
-            // x 軸比例尺
-            var xScale = d3.scaleLinear().domain([0, ts.length]).range([0, width]);
-            // y 軸比例尺 給繪製矩形用
-            var yScale = d3.scaleLinear().domain([0, 10]).range([0, height]);
-            // y 軸比例尺 2 繪製座標軸用
-            var yScale2 = d3.scaleLinear().domain([0, 10]).range([height, 0]);
-            // x 軸
-            var xAxis = d3.axisBottom().scale(xScale);
-            // y 軸
-            var yAxis = d3.axisLeft().scale(yScale2);
-            // 繪製矩形
-            svg.selectAll('.bar').data(ts).enter().append('g').classed('bar', true).append('rect').attr('x', (d, i) => xScale(i) + margin).attr('y', (d, i) => height - yScale(d) + margin).attr('height', (d, i) => yScale(d)).attr('width', '5%').attr('fill', '#999');
-            // 繪製 x 軸
-            svg.append("g").attr("class", "x axis").attr("transform", `translate(${margin}, ${height + margin})`).call(xAxis);
-            // 繪製 y 軸
-            svg.append("g").attr("class", "y axis").attr("transform", `translate(${margin}, ${margin})`).call(yAxis);
-            // 處理位移
-            svg.select('.x.axis').selectAll('.tick text').attr("dx", width * 0.05);
-            svg.select('.x.axis').selectAll('.tick line').attr('transform', 'translate(' + width * 0.05 + ', 0)');
-            svg.selectAll('.bar').attr('transform', 'translate(' + width * 0.02 + ', 0)');
-        }
+     
+    componentDidMount() {
+           
+   
+ 
+  
+      var width = 1200;
+      
+      var tree = data => {
+        const root = d3.hierarchy(data);
+        root.dx = 10;
+        root.dy = width / (root.height + 1);
+        return d3.tree().nodeSize([root.dx, root.dy])(root);
+      };
+      // attach chart to HTML body
+      d3.select(".content").append(() => chart(tree, data, width));
+ 
+   
+    
+    function chart(tree, data, width) {
+        const root = tree(data);
+
+        let x0 = Infinity;
+        let x1 = -x0;
+
+        root.each(d => {
+          if (d.x > x1) x1 = d.x;
+          if (d.x < x0) x0 = d.x;
+        });
+
+        const svg = d3.create("svg")
+          .attr("viewBox", [0, 0, width, x1 - x0 + root.dx * 2]);
+
+        const g = svg.append("g")
+          .attr("font-family", "sans-serif")
+          .attr("font-size", 10)
+          .attr("transform", `translate(${root.dy / 3},${root.dx - x0})`);
+
+        const link = g.append("g")
+          .attr("fill", "none")
+          .attr("stroke", "#555")
+          .attr("stroke-opacity", 0.4)
+          .attr("stroke-width", 1.5)
+          .selectAll("path")
+          .data(root.links())
+          .join("path")
+          .attr("d", d3.linkHorizontal()
+            .x(d => d.y)
+            .y(d => d.x));
+
+          console.log(link)
+
+        const node = g.append("g")
+          .attr("stroke-linejoin", "round")
+          .attr("stroke-width", 3)
+          .selectAll("g")
+          .data(root.descendants())
+          .join("g")
+          .attr("transform", d => `translate(${d.y},${d.x})`);
+
+        node.append("circle")
+          .attr("fill", d => d.children ? "#555" : "#999")
+          .attr("r", 2.5);
+
+        node.append("text")
+          .attr("dy", "0.31em")
+          .attr("x", d => d.children ? -6 : 6)
+          .attr("text-anchor", d => d.children ? "end" : "start")
+          .text(d => d.data.name + " (" + d.data.value + ")")
+          .clone(true).lower()
+          .attr("stroke", "white");
+
+        return svg.node();
+      };
+    
+
+  }
         render() {
             return (
-                 <div className = "content" > 
-                    <svg className = "svg"> </svg> 
+                 <div className="content" > 
+                  
                  </div>
              )
-            }
         }
-        export default MultilineChart;
+}
+export default MultilineChart;
