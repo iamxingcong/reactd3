@@ -8,7 +8,7 @@ class MultilineChart extends React.Component {
     componentDidMount() {
            
    
- 
+    console.log(data)
   
       var width = 1200;
       
@@ -72,7 +72,7 @@ class MultilineChart extends React.Component {
           .attr("dy", "0.31em")
           .attr("x", d => d.children ? -6 : 6)
           .attr("text-anchor", d => d.children ? "end" : "start")
-          .text(d => d.data.name + " (" + d.data.value + ")")
+          .text(d => d.data.name + " (" + d.data.name.length + ")")
           .clone(true).lower()
           .attr("stroke", "white");
 
