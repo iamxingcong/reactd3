@@ -58,6 +58,7 @@ html, #root, .App {
     display: block;
     min-width: 100%;
     min-height: 100%;
+    padding-top:  70px;
 }
 .navigation{
     display: block;
@@ -65,5 +66,10 @@ html, #root, .App {
     line-height: 2.5em;
     width: 100%;
     height: 2.5em;
-
+    position:  fixed;
+    top:  0px;
+    left:  0px;
+    padding-bottom:  15px;
+    z-index:  999;
+    background-color:  #fff;
 }

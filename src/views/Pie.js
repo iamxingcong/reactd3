@@ -23,7 +23,7 @@ class Pie extends React.Component {
             height = window.screen.height*9;
 
           // append the svg object to the body of the page
-          var svg = d3.select("#my_dataviz")
+          var svg = d3.select(".content")
           .append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
@@ -120,7 +120,7 @@ class Pie extends React.Component {
       }
         render() {
             return (
-                 <div id="my_dataviz" > 
+                 <div className="content" > 
                   
                  </div>
              )
