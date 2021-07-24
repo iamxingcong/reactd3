@@ -1,79 +1,61 @@
 /** MultilineChart.js */
 import React from "react";
 import * as d3 from "d3";
-
-const MultilineChart = ({ data = [], dimensions = {} }) => {
-  const svgRef = React.useRef(null);
-  const { width, height, margin = {} } = dimensions;
-  const svgWidth = width + margin.left + margin.right;
-  const svgHeight = height + margin.top + margin.bottom;
-
-  React.useEffect(() => {
-    const xScale = d3
-      .scaleTime()
-      .domain(d3.extent(data[0].items, (d) => d.date))
-      .range([0, width]);
-    const yScale = d3
-      .scaleLinear()
-      .domain([
-        d3.min(data[0].items, (d) => d.value) - 50,
-        d3.max(data[0].items, (d) => d.value) + 50
-      ])
-      .range([height, 0]);
-    // Create root container where we will append all other chart elements
-    const svgEl = d3.select(svgRef.current);
-    svgEl.selectAll("*").remove(); // Clear svg content before adding new elements
-    const svg = svgEl
-      .append("g")
-      .attr("transform", `translate(${margin.left},${margin.top})`);
-    // Add X grid lines with labels
-    const xAxis = d3
-      .axisBottom(xScale)
-      .ticks(5)
-      .tickSize(-height + margin.bottom);
-    const xAxisGroup = svg
-      .append("g")
-      .attr("transform", `translate(0, ${height - margin.bottom})`)
-      .call(xAxis);
-    xAxisGroup.select(".domain").remove();
-    xAxisGroup.selectAll("line").attr("stroke", "rgba(255, 255, 255, 0.2)");
-    xAxisGroup
-      .selectAll("text")
-      .attr("opacity", 0.5)
-      .attr("color", "white")
-      .attr("font-size", "0.75rem");
-    // Add Y grid lines with labels
-    const yAxis = d3
-      .axisLeft(yScale)
-      .ticks(5)
-      .tickSize(-width)
-      .tickFormat((val) => `${val}%`);
-    const yAxisGroup = svg.append("g").call(yAxis);
-    yAxisGroup.select(".domain").remove();
-    yAxisGroup.selectAll("line").attr("stroke", "rgba(255, 255, 255, 0.2)");
-    yAxisGroup
-      .selectAll("text")
-      .attr("opacity", 0.5)
-      .attr("color", "white")
-      .attr("font-size", "0.75rem");
-    // Draw the lines
-    const line = d3
-      .line()
-      .x((d) => xScale(d.date))
-      .y((d) => yScale(d.value));
-
-    svg
-      .selectAll(".line")
-      .data(data)
-      .enter()
-      .append("path")
-      .attr("fill", "none")
-      .attr("stroke", (d) => d.color)
-      .attr("stroke-width", 3)
-      .attr("d", (d) => line(d.items));
-  }, [data]);
-
-  return <svg ref={svgRef} width={svgWidth} height={svgHeight} />;
-};
-
-export default MultilineChart;
+class MultilineChart extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+                data: [],
+                
+            };
+        }
+        componentDidMount() {
+            var ts = []
+            for (var i = 0; i < 10; i++) {
+                ts.push(Math.floor(Math.random() * 7) + 2);
+            }
+            this.setState({
+                data: ts
+            });
+            console.log(this.state.data)
+            console.log(ts)
+            var svg = d3.select('.svg');
+            // 設定畫布尺寸 & 邊距
+            var margin = 40,
+                width = 960 - margin * 2,
+                height = 500 - margin * 2;
+            svg.attr({
+                "width": width + margin,
+                "height": height + margin * 2,
+                "transform": "translate(" + margin + "," + margin + ")"
+            });
+            // x 軸比例尺
+            var xScale = d3.scaleLinear().domain([0, ts.length]).range([0, width]);
+            // y 軸比例尺 給繪製矩形用
+            var yScale = d3.scaleLinear().domain([0, 10]).range([0, height]);
+            // y 軸比例尺 2 繪製座標軸用
+            var yScale2 = d3.scaleLinear().domain([0, 10]).range([height, 0]);
+            // x 軸
+            var xAxis = d3.axisBottom().scale(xScale);
+            // y 軸
+            var yAxis = d3.axisLeft().scale(yScale2);
+            // 繪製矩形
+            svg.selectAll('.bar').data(ts).enter().append('g').classed('bar', true).append('rect').attr('x', (d, i) => xScale(i) + margin).attr('y', (d, i) => height - yScale(d) + margin).attr('height', (d, i) => yScale(d)).attr('width', '5%').attr('fill', '#999');
+            // 繪製 x 軸
+            svg.append("g").attr("class", "x axis").attr("transform", `translate(${margin}, ${height + margin})`).call(xAxis);
+            // 繪製 y 軸
+            svg.append("g").attr("class", "y axis").attr("transform", `translate(${margin}, ${margin})`).call(yAxis);
+            // 處理位移
+            svg.select('.x.axis').selectAll('.tick text').attr("dx", width * 0.05);
+            svg.select('.x.axis').selectAll('.tick line').attr('transform', 'translate(' + width * 0.05 + ', 0)');
+            svg.selectAll('.bar').attr('transform', 'translate(' + width * 0.02 + ', 0)');
+        }
+        render() {
+            return (
+                 <div className = "content" > 
+                    <svg className = "svg"> </svg> 
+                 </div>
+             )
+            }
+        }
+        export default MultilineChart;
