@@ -5,6 +5,8 @@ import './App.css';
 import React from "react";
 
 import Home from "./views/Home.js"
+import Pie from "./views/Pie.js"
+
 
 import {
   BrowserRouter as Router,
@@ -19,13 +21,16 @@ export default function App() {
       
         <span className="navigation">
               <Link to="/Home"> Home </Link>
-            
+              <Link to="/Pie"> Pie </Link>
         </span>
 
         <Switch>
         
           <Route path="/Home">
             <Home />
+          </Route>
+            <Route path="/Pie">
+            <Pie />
           </Route>
         
         </Switch>
