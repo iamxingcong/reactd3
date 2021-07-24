@@ -16,17 +16,12 @@ import {
 export default function App() {
   return (
     <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
+      
+        <span className="navigation">
               <Link to="/Home"> Home </Link>
-            </li>
-           
-          
-          </ul>
-        </nav>
- 
+            
+        </span>
+
         <Switch>
         
           <Route path="/Home">
@@ -34,7 +29,7 @@ export default function App() {
           </Route>
         
         </Switch>
-      </div>
+     
     </Router>
   );
 }

@@ -10,11 +10,11 @@ class MultilineChart extends React.Component {
    
     console.log(data)
   
-      var width = 1200;
+      var width = window.screen.width;
       
       var tree = data => {
         const root = d3.hierarchy(data);
-        root.dx = 10;
+        root.dx = 40;
         root.dy = width / (root.height + 1);
         return d3.tree().nodeSize([root.dx, root.dy])(root);
       };
@@ -35,12 +35,12 @@ class MultilineChart extends React.Component {
         });
 
         const svg = d3.create("svg")
-          .attr("viewBox", [0, 0, width, x1 - x0 + root.dx * 2]);
+          .attr("viewBox", [0, 0, width, x1 - x0 + root.dx * 3]);
 
         const g = svg.append("g")
           .attr("font-family", "sans-serif")
-          .attr("font-size", 10)
-          .attr("transform", `translate(${root.dy / 3},${root.dx - x0})`);
+          .attr("font-size", 20)
+          .attr("transform", `translate(${root.dy / 9},${root.dx - x0})`);
 
         const link = g.append("g")
           .attr("fill", "none")
