@@ -37,7 +37,7 @@ class C extends React.Component {
         var svg = d3.select(".c").append("svg")
             .attr("width", diameter)
             .attr("height", diameter)
-          .append("g")
+            .append("g")
             .attr("transform", "translate(" + radius + "," + radius + ")");
 
         var link = svg.append("g").selectAll(".link"),
@@ -64,7 +64,7 @@ class C extends React.Component {
               .attr("dy", "0.31em")
               .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + (d.y + 8) + ",0)" + (d.x < 180 ? "" : "rotate(180)"); })
               .attr("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
-              .text(function(d) { return d.data.key; })
+              .text(function(d) { return d.data.key+"-"+d.data.size; })
               .on("mouseover", mouseovered)
               .on("mouseout", mouseouted);
 

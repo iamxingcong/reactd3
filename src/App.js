@@ -10,7 +10,7 @@ import Radial from './views/Radial.js'
 import A from './views/A.js'
 import B from './views/B.js'
 import C from './views/C.js'
-
+import D from './views/D.js'
 
 import {
   BrowserRouter as Router,
@@ -30,6 +30,7 @@ export default function App() {
               <Link to="/A"> A </Link>
               <Link to="/B"> B </Link>
               <Link to="/C"> C </Link>
+              <Link to="/D"> D </Link>
         </span>
 
         <Switch>
@@ -51,6 +52,9 @@ export default function App() {
           </Route>
           <Route path="/C">
             <C />
+          </Route>
+          <Route path="/D">
+            <D />
           </Route>
         
         </Switch>

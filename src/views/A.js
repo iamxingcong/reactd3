@@ -54,7 +54,7 @@ class A extends React.Component {
 
             var link = g.selectAll(".link")
               .data(root.descendants().slice(1))
-            .enter().append("path")
+              .enter().append("path")
               .attr("class", "link")
               .attr("d", function(d) {
                 return "M" + d.y + "," + d.x
@@ -67,7 +67,7 @@ class A extends React.Component {
 
             var node = g.selectAll(".node")
               .data(root.descendants())
-            .enter().append("g")
+              .enter().append("g")
               .attr("class", function(d) { return "node" + (d.children ? " node--internal" : " node--leaf"); })
               .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; })
 
@@ -78,7 +78,7 @@ class A extends React.Component {
               .attr("dy", 3)
               .attr("x", function(d) { return d.children ? -8 : 8; })
               .style("text-anchor", function(d) { return d.children ? "end" : "start"; })
-              .text(function(d) { return d.id.substring(d.id.lastIndexOf(".") + 1); });
+              .text(function(d) { return d.id.substring(d.id.lastIndexOf(".") + 1) ; });
             
               }
 
