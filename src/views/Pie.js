@@ -23,6 +23,9 @@ class Pie extends React.Component {
             height = window.screen.height*9;
 
           // append the svg object to the body of the page
+        
+ 
+
           var svg = d3.select(".content")
           .append("svg")
             .attr("width", width + margin.left + margin.right)
