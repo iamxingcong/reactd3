@@ -16,20 +16,25 @@ class Radial extends React.Component {
       //   console.log(data)
       // }).catch(function(err) {
       //     throw err;
-        // })       
+      // })   
 
+        var width = window.screen.width
+        var height = 1800
+        var svg = d3
+        .select(".c")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height)
 
-          var svg = d3.select("svg"),
-          width = +svg.attr("width"),
-          height = +svg.attr("height"),
-          g = svg.append("g").attr("transform", "translate(" + (width / 2 - 15) + "," + (height / 2 + 25) + ")");
+       
+        var   g = svg.append("g").attr("transform", "translate(" + (width / 2 - 15) + "," + (height / 2 + 25) + ")");
 
           var stratify = d3.stratify()
           .parentId(function(d) { return d.id.substring(0, d.id.lastIndexOf(".")); });
 
           var tree = d3.cluster()
           .size([360, 390])
-          .separation(function(a, b) { return (a.parent == b.parent ? 1 : 2) / a.depth; });
+          .separation(function(a, b) { return (a.parent === b.parent ? 1 : 2) / a.depth; });
 
           d3.csv(data).then(function(data) {
 
@@ -77,7 +82,7 @@ class Radial extends React.Component {
     render() {
         return (
               <div className="c" > 
-                <svg width="960" height="950"></svg>
+              
               </div>
           )
     }
