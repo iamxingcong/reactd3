@@ -18,7 +18,7 @@ class A extends React.Component {
       //     throw err;
       // })   
 
-              //JSON object with the data
+       //JSON object with the data
 
               console.log(data)
               var width = 960
@@ -39,7 +39,12 @@ class A extends React.Component {
             .size([height, width - 160]);
 
             var stratify = d3.stratify()
-            .parentId(function(d) { return d.id.substring(0, d.id.lastIndexOf(".")); });
+            .parentId(function(d) { 
+
+              
+              return d.id.substring(0, d.id.lastIndexOf(".")); 
+
+            });
 
          d3.csv(data).then(function(data) {
             var root = stratify(data)
