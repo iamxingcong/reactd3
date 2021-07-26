@@ -54,9 +54,10 @@ html, #root, .App {
     height: 100%;
     display: block;
 }
+.c,
 .content {
     display: block;
-    min-width: 100%;
+    width: 100%;
     min-height: 100%;
     padding-top:  70px;
 }
@@ -73,3 +74,18 @@ html, #root, .App {
     z-index:  999;
     background-color:  #fff;
 }
+
+
+.arc text {
+    font: 12px arial;
+    text-anchor: middle;
+ }
+ 
+ .arc path {
+    stroke: #fff;
+ }
+
+.title {
+    fill: green;
+    font-weight: italic;
+ }
