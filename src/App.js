@@ -7,6 +7,8 @@ import React from "react";
 import Home from "./views/Home.js"
 import Pie from "./views/Pie.js"
 import Radial from './views/Radial.js'
+import A from './views/A.js'
+
 
 import {
   BrowserRouter as Router,
@@ -23,6 +25,7 @@ export default function App() {
               <Link to="/Home"> Home </Link>
               <Link to="/Pie"> Pie </Link>
               <Link to="/Radial"> Radial </Link>
+              <Link to="/A"> A </Link>
         </span>
 
         <Switch>
@@ -35,6 +38,9 @@ export default function App() {
           </Route>
           <Route path="/Radial">
             <Radial />
+          </Route>
+          <Route path="/A">
+            <A />
           </Route>
         
         </Switch>

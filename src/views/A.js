@@ -6,7 +6,7 @@ import * as d3 from "d3";
  
 // import data from './food_court.csv';
 import data from './flare.csv'
-class Radial extends React.Component {
+class A extends React.Component {
      
   
 
@@ -19,7 +19,7 @@ class Radial extends React.Component {
       // })   
 
         var width = window.screen.width
-        var height = 1200
+        var height = 900
         var svg = d3
         .select(".c")
         .append("svg")
@@ -87,4 +87,4 @@ class Radial extends React.Component {
           )
     }
 }
-export default Radial
+export default A
