@@ -19,7 +19,7 @@ class Radial extends React.Component {
       // })   
 
         var width = window.screen.width
-        var height = 1800
+        var height = 900
         var svg = d3
         .select(".c")
         .append("svg")
@@ -65,7 +65,7 @@ class Radial extends React.Component {
             .attr("r", 2.5);
 
           node.append("text")
-            .attr("dy", ".31em")
+            .attr("dy", ".21em")
             .attr("x", function(d) { return d.x < 180 === !d.children ? 6 : -6; })
             .style("text-anchor", function(d) { return d.x < 180 === !d.children ? "start" : "end"; })
             .attr("transform", function(d) { return "rotate(" + (d.x < 180 ? d.x - 90 : d.x + 90) + ")"; })
