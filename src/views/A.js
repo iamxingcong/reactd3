@@ -21,8 +21,8 @@ class A extends React.Component {
        //JSON object with the data
 
               console.log(data)
-              var width = 960
-              var height = 3200
+             var width = window.screen.width
+             var height = 2200
               var svg = d3
               .select(".c")
               .append("svg")

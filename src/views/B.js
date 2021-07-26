@@ -18,11 +18,10 @@ class B  extends React.Component {
       //     throw err;
       // })   
 
-              //JSON object with the data
-
+              
             console.log(data)
-              var width = 960
-              var height = 1060
+             var width = window.screen.width
+             var height = 1200
               var svg = d3
               .select(".c")
               .append("svg")
