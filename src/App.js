@@ -9,6 +9,8 @@ import Pie from "./views/Pie.js"
 import Radial from './views/Radial.js'
 import A from './views/A.js'
 import B from './views/B.js'
+import C from './views/C.js'
+
 
 import {
   BrowserRouter as Router,
@@ -27,6 +29,7 @@ export default function App() {
               <Link to="/Radial"> Radial </Link>
               <Link to="/A"> A </Link>
               <Link to="/B"> B </Link>
+              <Link to="/C"> C </Link>
         </span>
 
         <Switch>
@@ -45,6 +48,9 @@ export default function App() {
           </Route>
            <Route path="/B">
             <B />
+          </Route>
+          <Route path="/C">
+            <C />
           </Route>
         
         </Switch>
