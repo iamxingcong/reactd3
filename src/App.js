@@ -35,7 +35,7 @@ export default function App() {
               <Link to="/C"> C </Link>
               <Link to="/D"> D </Link>
               <Link to="/E"> E </Link>
-              <Link to="/F"> E </Link>
+              <Link to="/F"> f </Link>
 
         </span>
 
