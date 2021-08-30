@@ -11,6 +11,9 @@ import A from './views/A.js'
 import B from './views/B.js'
 import C from './views/C.js'
 import D from './views/D.js'
+import E from './views/E.js'
+
+
 
 import {
   BrowserRouter as Router,
@@ -31,6 +34,9 @@ export default function App() {
               <Link to="/B"> B </Link>
               <Link to="/C"> C </Link>
               <Link to="/D"> D </Link>
+              <Link to="/E"> E </Link>
+
+
         </span>
 
         <Switch>
@@ -56,7 +62,9 @@ export default function App() {
           <Route path="/D">
             <D />
           </Route>
-        
+          <Route path="/E">
+            <E />
+          </Route>
         </Switch>
      
     </Router>
