@@ -9,7 +9,7 @@ import * as d3 from "d3";
 
 import dataset from './miserables.json'
 
-class E extends React.Component {
+class F extends React.Component {
 
 
 
@@ -90,4 +90,4 @@ class E extends React.Component {
     )
   }
 }
-export default E
+export default F

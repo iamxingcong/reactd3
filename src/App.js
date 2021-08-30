@@ -12,7 +12,7 @@ import B from './views/B.js'
 import C from './views/C.js'
 import D from './views/D.js'
 import E from './views/E.js'
-
+import F from './views/F.js'
 
 
 import {
@@ -35,7 +35,7 @@ export default function App() {
               <Link to="/C"> C </Link>
               <Link to="/D"> D </Link>
               <Link to="/E"> E </Link>
-
+              <Link to="/F"> E </Link>
 
         </span>
 
@@ -64,6 +64,9 @@ export default function App() {
           </Route>
           <Route path="/E">
             <E />
+          </Route>
+          <Route path="/F">
+            <F />
           </Route>
         </Switch>
      
